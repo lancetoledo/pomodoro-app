@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&family=Roboto+Slab:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="container">
+        <h2>pomodoro</h2>
+
+        <div class='nav'>
+            <ul>
+                <li onclick="timer.select('pomodoro')"class = "pointer active">pomodoro</li>
+                <li onclick="timer.select('shortbreak')" class = "pointer">short break</li>
+                <li onclick="timer.select('longbreak')" class = "pointer">long break</li>
+            </ul>
+            <div id="indicator"></div>
+        </div>
+
+        <section id="timer" class="center">
+            <div id="outercircle">
+                <div id="innercircle">
+                    <svg id="ring">
+                        <circle r="163" cx = "50%" cy = "50%"></circle>
+                    </svg>
+                </div>
+                <div id="textcontainer">
+                    <h1 id="time">00:00</h1>
+                    <h3 id="action" class = "pointer" onclick="action(this.innerText)">start</h3>
+                </div>
+            </div>
+        </section>
+
+        <section id="settings" class="center">
+            <img class="pointer" src="./assets/icon-settings.svg" />
+          </section>
+          <section id="settingscontainer">
+            <div id="formouter">
+              <form>
+                <div id="settingsheader">
+                  <h2>Settings</h2>
+                  <img
+                    src="./assets/icon-close.svg"
+                    id="close"
+                    height="14px"
+                    width="14px"
+                    class="pointer"
+                  />
+                </div>
+                <hr />
+                <!-- 
+                  Here be dragons.  This is basically what's happening in this blob
+                  of code:
+                  1. #settings<section> - time, font or color.
+                  2. .inputs for the section to group them all,
+                  3. .input for the individual input.
+                  NOTE ON Number input types - Totally custom buttons and arrows needed
+                  to match the figma file.  So I have
+                  1. .inputbuttons which holds the replacement buttons.  They fire off
+                      a function in index.js to handle incrementing/decrementing.
+                -->
+                <!-- Timer settings -->
+                <div id="settingstime">
+                  <h4>time (minutes)</h4>
+                  <div id="inputs">
+                    <div class="input">
+                      <label for="pomodoro" class="body2">pomodoro</label>
+                      <div class="inputnumber">
+                        <!-- The actual input -->
+                        <input
+                          id="pomodoro"
+                          type="number"
+                          value="25"
+                          class="body1"
+                          min="0"
+                        />
+                        <!-- 
+                          The nested replacement buttons
+                          The button container
+                        -->
+                        <div class="inputbuttons">
+                          <!-- 
+                            The up and down arrows.
+                          -->
+                          <button type="button" class="uparrow" onclick="inc('pomodoro')">
+                            <img src="./assets/icon-arrow-up.svg" />
+                          </button>
+                          <button type="button" class="downarrow" onclick="dec('pomodoro')">
+                            <img src="./assets/icon-arrow-down.svg" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="input">
+                      <label for="shortbreak" class="body2">short break</label>
+                      <div class="inputnumber">
+                        <input
+                          id="shortbreak"
+                          type="number"
+                          value="5"
+                          class="body1"
+                          min="0"
+                        />
+                        <div class="inputbuttons">
+                          <button type="button" class="uparrow" onclick="inc('shortbreak')">
+                            <img src="./assets/icon-arrow-up.svg" />
+                          </button>
+                          <button type="button" class="downarrow" onclick="dec('shortbreak')">
+                            <img src="./assets/icon-arrow-down.svg" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="input">
+                      <label for="longbreak" class="body2">long break</label>
+                      <div class="inputnumber">
+                        <input
+                          id="longbreak"
+                          type="number"
+                          value="15"
+                          class="body1"
+                          min="0"
+                        />
+                        <div class="inputbuttons">
+                          <button type="button" class="uparrow" onclick="inc('longbreak')">
+                            <img src="./assets/icon-arrow-up.svg" />
+                          </button>
+                          <button type="button" class="downarrow" onclick="dec('longbreak')">
+                            <img src="./assets/icon-arrow-down.svg" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Font Settings -->
+                <div id="settingsfont">
+                  <hr />
+                  <div id="innerfont">
+                    <h4>Font</h4>
+                    <div class="circle font fontactive kumbh pointer">Aa</div>
+                    <div class="circle font roboto pointer">Aa</div>
+                    <div class="circle font mono pointer">Aa</div>
+                  </div>
+                </div>
+                <!-- Color Settings -->
+                <div id="settingscolor">
+                  <hr />
+                  <div id="innercolor">
+                    <h4>Color</h4>
+                    <div class="circle color orange coloractive pointer">
+                      <img src="./assets/icon-check.svg" />
+                    </div>
+                    <div class="circle color blue pointer">
+                      <img src="./assets/icon-check.svg" />
+                    </div>
+                    <div class="circle color purple pointer">
+                      <img src="./assets/icon-check.svg" />
+                    </div>
+                  </div>
+                </div>
+                <div id="settingsbutton">
+                  <button type="button" id="apply">apply</button>
+                  <!-- 
+                    This will act as the container for the apply button
+                    color background that we can manipulate through settings.
+                  -->
+                  <div id="applybg"></div>
+                </div>
+              </form>
+            </div>
+            <div id="settingsoverlay"></div>
+          </section>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script src="./js/timer.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/settings.js"></script>
+
+</body>
+</html>

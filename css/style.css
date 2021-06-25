@@ -1,0 +1,400 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap');
+
+
+:root{
+    --orange: #f87070;
+    --cyan: #70f3f8;
+    --purple: #d881f8;
+    --light-blue: #d7e0ff;
+    --dark-blue: #1e213f;
+    --darker-blue: #161832;
+    --white: #fff;
+    --beige: #eff1fa;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing:border-box;
+
+}
+
+body {
+    font-family: "Kumbh Sans", sans-serif;
+    color: var(--light-blue);
+    background-color: var(--dark-blue)
+}
+
+form {
+    position: relative;
+    pointer-events: auto;
+    margin: auto;
+    border-radius: 25px;
+    width: 550px;
+    background-color: var(--white);
+}
+
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.nav {
+    border-radius: 50px;
+    padding-left: 10px;
+    width: 373px;
+    height: 63px;
+    background-color: var(--darker-blue);
+    z-index: 99;
+}
+
+.nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    position: relative;
+}
+
+.nav ul li {
+    opacity: .4;
+    font-weight: 700;
+    transition: opacity 10ms ease-out;;   
+}
+
+#indicator {
+    background-color: var(--orange);
+    border-radius: 50px;
+    height: 48px;
+    width: calc(95%/3);
+    margin-top: -55px;
+    transition: margin-left 300ms ease-out;
+
+}
+
+.pointer {
+    user-select: none;
+}
+
+.pointer.active {
+    color: var(--darker-blue);
+    opacity: 1;
+}
+
+#outercircle {
+    position: relative;
+    margin-top: 45px;
+    display: flex;
+    height: 410px;
+    width: 410px;
+    border-radius:50%;
+    background: linear-gradient(315deg, #2e325a 0%, #0e112a 100%);
+    box-shadow: -50px -50px 100px #272c5a, 50px 50px 100px #121530;
+
+}
+
+#innercircle {
+    margin: auto;
+    display: flex;
+    height: 366px;
+    width: 366px;
+    border-radius: 50%;
+    background-color: var(--darker-blue);
+}
+
+#ring {
+    margin: auto;
+    width: 339px;
+    height: 339px;
+}
+
+#textcontainer {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 160px;
+    font-size: 45px;
+}
+
+#action {
+    font-size: 30px;
+}
+
+#ring circle{
+    fill: transparent;
+    stroke: var(--orange);
+    stroke-width: 10px;
+    stroke-dasharray: 1024, 1024;
+    stroke-dashoffset: 1024;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    transition: stroke-dashoffset 200ms ease-out;
+}
+
+/* Settings */
+#settings {
+    margin-top: 100px;
+  }
+  #settingscontainer {
+    visibility: hidden;
+    opacity: 0;
+    z-index: 100;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    transition: opacity ease-in 0.2s, visibility linear 0.5s;
+  }
+  /*
+  DESIGN NOTE: 
+  Form outer - sized to the window (because I have an overlay layer that has
+  to sit ontop of the timer, I need another container that sits on top
+  of THAT for the form.  The 'outer' is a div the size of the window.
+  The 'inner' is the size of the actual settings form.
+  */
+  #formouter {
+    pointer-events: none;
+    position: absolute;
+    z-index: 200;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+  }
+  #settingsheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 34px 40px;
+  }
+  #settingsheader > h2 {
+    margin: 0;
+    color: var(--darker-blue);
+  }
+  #settingstime {
+    margin: 0 20px 0 40px;
+  }
+  #settingstime > h4 {
+    display: flex;
+    padding: 25px 0px;
+    color: var(--darker-blue);
+  }
+  #settingsoverlay {
+    pointer-events: auto;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(10, 12, 28, 0.5);
+    z-index: 100;
+  }
+  #settingsfont {
+    padding: 0 40px;
+    margin: 24px 0;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  #settingsfont h4 {
+    color: var(--darker-blue);
+    margin-right: auto;
+  }
+  .circle {
+    border-radius: 25px;
+    margin-left: 16px;
+    height: 40px;
+    width: 40px;
+    background-color: var(--beige);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--darker-blue);
+    user-select: none;
+  }
+  .fontactive {
+    background-color: var(--darker-blue);
+    color: var(--white);
+  }
+  .font:hover {
+    border: 4px solid #fff;
+    box-shadow: 0 0 2px #888;
+  }
+  .fontactive:hover {
+    border: none;
+    box-shadow: none;
+  }
+  #innerfont {
+    margin: 24px 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+  #settingscolor {
+    padding: 24px 40px;
+    padding-bottom: 60px;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  #settingscolor h4 {
+    color: var(--darker-blue);
+    margin-right: auto;
+  }
+  #innercolor {
+    padding: 42px 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+  #settingsbutton {
+    margin-top: 90px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  #apply {
+    position: absolute;
+    z-index: 140;
+    bottom: -20px;
+    left: calc(50% - 200px / 2);
+    font-weight: bold;
+    color: var(--white);
+    text-transform: capitalize;
+    font-size: 16px;
+    height: 53px;
+    width: 200px;
+    background-color: transparent;
+    border-radius: 50px;
+    border-style: none;
+    border: none;
+    outline: none;
+  }
+  #apply:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+  }
+  #applybg {
+    position: absolute;
+    bottom: -20px;
+    left: calc(50% - 200px / 2);
+    font-weight: bold;
+    height: 53px;
+    width: 200px;
+    background-color: var(--orange);
+    border-radius: 50px;
+    border-style: none;
+    border: none;
+    outline: none;
+  }
+  .color img {
+    opacity: 0;
+  }
+  .coloractive img {
+    opacity: 1;
+  }
+  .orange {
+    background-color: var(--orange);
+  }
+  .blue {
+    background-color: var(--cyan);
+  }
+  .purple {
+    background-color: var(--purple);
+  }
+  .kumbh {
+    font-family: "Kumbh Sans", sans-serif;
+  }
+  .roboto {
+    font-family: "Roboto Slab", serif;
+  }
+  .mono {
+    font-family: "Space Mono", monospace;
+  }
+  .inputs {
+    display: flex;
+  }
+  .input {
+    display: inline-flex;
+    flex-direction: column;
+    width: 140px;
+    margin-right: 20px;
+  }
+  .input > label {
+    color: var(--darker-blue);
+    padding-bottom: 10px;
+    opacity: 40%;
+  }
+  .input input {
+    height: 48px;
+    width: 80px;
+    background-color: var(--beige);
+    border: none;
+    outline: none;
+    appearance: text;
+    color: var(--darker-blue);
+  }
+  /* 
+    This is where we start working through the number inputs
+    for the settings modal.  Lots of custom elements here!  Be warned!
+  */
+  /* Hide the up and down arrows. */
+  .input input::-webkit-inner-spin-button,
+  .input input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .inputnumber {
+    display: flex;
+    background-color: var(--beige);
+    justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 10px;
+  }
+  /* 
+    Instead we're using input buttons to represent the up and
+    down arrows.  They have to be in their own container and lined
+    up next to the number input.
+  */
+  .inputbuttons {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--beige);
+  }
+  .inputbuttons button {
+    flex-grow: 1;
+    background-color: var(--beige);
+    border: none;
+    outline: none;
+  }
+  .inputbuttons button img {
+    opacity: 0.25;
+    transition: opacity 200ms ease-out;
+  }
+  .inputbuttons button img:hover {
+    opacity: 1;
+  }
+
+  .center {
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  .body1 {
+      font-weight:bold;
+      font-size: 14px;
+      line-height: 18px;
+  }
+
+  .body2 {
+    font-weight:bold;
+    font-size: 12px;
+    line-height: 14px;
+}
